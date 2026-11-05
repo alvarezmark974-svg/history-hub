@@ -1065,3 +1065,107 @@ featuredDiscoveries.forEach(function(card) {
 
   card.insertBefore(label, card.firstChild);
 });
+
+
+// EXTRA HISTORY MINI GAMES
+const yearRounds = [
+  { question: "In what year did the first Moon landing happen?", answer: "1969", choices: ["1492", "1776", "1969"] },
+  { question: "In what year was the Declaration of Independence adopted?", answer: "1776", choices: ["1066", "1776", "1865"] },
+  { question: "In what year did World War II end?", answer: "1945", choices: ["1918", "1939", "1945"] },
+  { question: "In what year did the Berlin Wall fall?", answer: "1989", choices: ["1961", "1989", "2001"] },
+  { question: "In what year did the ancient Olympic Games begin (traditionally)?", answer: "776 BC", choices: ["776 BC", "44 BC", "500 AD"] }
+];
+const truthRounds = [
+  { question: "The Great Wall of China was built over many centuries.", answer: true, fact: "Different sections were built and rebuilt over many centuries." },
+  { question: "Cleopatra lived closer in time to the Moon landing than to the building of the Great Pyramid.", answer: true, fact: "Cleopatra lived around 2,500 years after the Great Pyramid was built." },
+  { question: "The Roman Empire had cars.", answer: false, fact: "Romans travelled by foot, horses, carts, and ships—not cars." },
+  { question: "The first modern Olympic Games were held in 1896.", answer: true, fact: "The first modern games took place in Athens, Greece." },
+  { question: "The dinosaurs lived at the same time as ancient Egyptian pharaohs.", answer: false, fact: "Non-avian dinosaurs became extinct millions of years before ancient Egypt." }
+];
+const whoRounds = [
+  { question: "I was an Egyptian queen known for my connection with Julius Caesar and Mark Antony. Who am I?", answer: "Cleopatra", choices: ["Cleopatra", "Joan of Arc", "Queen Victoria"] },
+  { question: "I led a nonviolent movement for India's independence. Who am I?", answer: "Mahatma Gandhi", choices: ["Nelson Mandela", "Mahatma Gandhi", "Winston Churchill"] },
+  { question: "I was the first person to walk on the Moon. Who am I?", answer: "Neil Armstrong", choices: ["Yuri Gagarin", "Neil Armstrong", "Buzz Aldrin"] },
+  { question: "I was a French military leader who became emperor in 1804. Who am I?", answer: "Napoleon Bonaparte", choices: ["Napoleon Bonaparte", "Julius Caesar", "Alexander the Great"] },
+  { question: "I was a famous nurse during the Crimean War, known as the Lady with the Lamp. Who am I?", answer: "Florence Nightingale", choices: ["Florence Nightingale", "Amelia Earhart", "Harriet Tubman"] }
+];
+let yearIndex = 0, truthIndex = 0, whoIndex = 0;
+let yearPoints = 0, truthPoints = 0, whoPoints = 0;
+let yearAnswered = false, truthAnswered = false, whoAnswered = false;
+
+function showYearRound() {
+  const round = yearRounds[yearIndex % yearRounds.length];
+  document.getElementById("year-question").textContent = round.question;
+  const area = document.getElementById("year-answers");
+  area.replaceChildren();
+  round.choices.forEach(choice => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.textContent = choice;
+    button.addEventListener("click", () => {
+      if (yearAnswered) return;
+      yearAnswered = true;
+      const correct = choice === round.answer;
+      if (correct) yearPoints++;
+      document.getElementById("year-feedback").textContent = correct ? "🎉 Correct! Great job." : "Not quite! The answer is " + round.answer + ".";
+      document.getElementById("year-score").textContent = "Score: " + yearPoints;
+      document.getElementById("year-next").hidden = false;
+      area.querySelectorAll("button").forEach(b => b.disabled = true);
+    });
+    area.appendChild(button);
+  });
+  yearAnswered = false;
+  document.getElementById("year-feedback").textContent = "Choose the correct year.";
+  document.getElementById("year-next").hidden = true;
+}
+function showTruthRound() {
+  const round = truthRounds[truthIndex % truthRounds.length];
+  document.getElementById("truth-question").textContent = round.question;
+  document.getElementById("truth-feedback").textContent = "Pick an answer!";
+  document.getElementById("truth-next").hidden = true;
+  document.querySelectorAll("[data-truth]").forEach(button => {
+    button.disabled = false;
+    button.onclick = () => {
+      if (truthAnswered) return;
+      truthAnswered = true;
+      const correct = button.dataset.truth === String(round.answer);
+      if (correct) truthPoints++;
+      document.getElementById("truth-feedback").textContent = (correct ? "🎉 Correct! " : "Not quite. ") + round.fact;
+      document.getElementById("truth-score").textContent = "Score: " + truthPoints;
+      document.getElementById("truth-next").hidden = false;
+      document.querySelectorAll("[data-truth]").forEach(b => b.disabled = true);
+    };
+  });
+  truthAnswered = false;
+}
+function showWhoRound() {
+  const round = whoRounds[whoIndex % whoRounds.length];
+  document.getElementById("who-question").textContent = round.question;
+  const area = document.getElementById("who-answers");
+  area.replaceChildren();
+  round.choices.forEach(choice => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.textContent = choice;
+    button.addEventListener("click", () => {
+      if (whoAnswered) return;
+      whoAnswered = true;
+      const correct = choice === round.answer;
+      if (correct) whoPoints++;
+      document.getElementById("who-feedback").textContent = correct ? "🎉 That's right!" : "Good try! The answer is " + round.answer + ".";
+      document.getElementById("who-score").textContent = "Score: " + whoPoints;
+      document.getElementById("who-next").hidden = false;
+      area.querySelectorAll("button").forEach(b => b.disabled = true);
+    });
+    area.appendChild(button);
+  });
+  whoAnswered = false;
+  document.getElementById("who-feedback").textContent = "Who is it?";
+  document.getElementById("who-next").hidden = true;
+}
+document.getElementById("year-next").addEventListener("click", () => { yearIndex++; showYearRound(); });
+document.getElementById("truth-next").addEventListener("click", () => { truthIndex++; showTruthRound(); });
+document.getElementById("who-next").addEventListener("click", () => { whoIndex++; showWhoRound(); });
+showYearRound();
+showTruthRound();
+showWhoRound();
