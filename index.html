@@ -1,0 +1,539 @@
+<header class="topbar">
+  <div class="logo">🏛️ HISTORY HUB</div>
+  <nav>
+    <a href="#" onclick="showHome()">Home</a>
+    <a href="#explore">Explore</a>
+    <a href="#facts">Fun Facts</a>
+    <a href="#quiz">Quiz</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <p class="gold">DISCOVER THE PAST</p>
+  <h1>History is full of<br /><span>amazing stories.</span></h1>
+  <p>
+    Explore ancient civilizations, legendary events,<br />
+    and fascinating facts from around the world.
+  </p>
+
+  <div class="search">
+    <input id="searchInput" placeholder="Search history..." />
+    <button onclick="searchHistory()">🔎 Search</button>
+  </div>
+</section>
+
+<main>
+  <h2 id="explore">Explore History</h2>
+  <p class="subtitle">Discover incredible moments from the past.</p>
+
+  <div class="cards">
+    <div class="card" onclick="openTopic('egypt')">
+      <div class="picture egypt">🏺</div>
+      <h3>Ancient Egypt</h3>
+      <p>Pyramids, pharaohs, and mysterious ancient wonders.</p>
+      <span>Explore →</span>
+    </div>
+
+    <div class="card" onclick="openTopic('rome')">
+      <div class="picture rome">🏛️</div>
+      <h3>Roman Empire</h3>
+      <p>Discover emperors, gladiators, and Roman life.</p>
+      <span>Explore →</span>
+    </div>
+
+    <div class="card" onclick="openTopic('ww2')">
+      <div class="picture war">🌍</div>
+      <h3>World War II</h3>
+      <p>Learn about one of history's most important events.</p>
+      <span>Explore →</span>
+    </div>
+
+    <div class="card" onclick="openTopic('america')">
+      <div class="picture america">🗽</div>
+      <h3>American Revolution</h3>
+      <p>Discover how America became independent.</p>
+      <span>Explore →</span>
+    </div>
+  </div>
+
+  <section class="fact-box" id="facts">
+    <p class="gold">✨ DID YOU KNOW?</p>
+    <h2>Fun Fact of the Day</h2>
+    <p id="fact">The Great Pyramid of Giza was built over 4,500 years ago!</p>
+    <button onclick="newFact()">Discover Another Fact</button>
+  </section>
+
+  <section class="quiz" id="quiz">
+    <p class="gold">🧠 TEST YOUR KNOWLEDGE</p>
+    <h2>History Quiz</h2>
+    <p id="question">Which civilization built the pyramids of Giza?</p>
+    <div id="answers"></div>
+    <p id="quizResult"></p>
+    <button onclick="nextQuestion()">Next Question →</button>
+  </section>
+
+  <section id="topicPage" class="topicPage" hidden>
+    <button onclick="showHome()">← Back to Home</button>
+    <h2 id="topicTitle"></h2>
+    <p id="topicText"></p>
+  </section>
+
+  <p id="searchResults"></p>
+</main>
+
+<footer>
+  <h2>🏛️ HISTORY HUB</h2>
+  <p>Explore the past. Discover something amazing.</p>
+  <p>© 2026 History Hub</p>
+</footer>
+
+<section class="timeline" id="timeline">
+  <p class="gold">⏳ TRAVEL THROUGH TIME</p>
+  <h2>History Timeline</h2>
+  <p>Explore important moments in history.</p>
+
+  <div class="timeline-item">
+    <span>3100 BCE</span>
+    <h3>Ancient Egypt Unites</h3>
+    <p>Upper and Lower Egypt are traditionally united under one ruler.</p>
+  </div>
+
+  <div class="timeline-item">
+    <span>776 BCE</span>
+    <h3>First Recorded Olympic Games</h3>
+    <p>The ancient Olympic Games take place in Greece.</p>
+  </div>
+
+  <div class="timeline-item">
+    <span>27 BCE</span>
+    <h3>Roman Empire Begins</h3>
+    <p>Augustus becomes the first Roman emperor.</p>
+  </div>
+
+  <div class="timeline-item">
+    <span>1492</span>
+    <h3>Voyage Across the Atlantic</h3>
+    <p>Christopher Columbus reaches the Caribbean.</p>
+  </div>
+
+  <div class="timeline-item">
+    <span>1776</span>
+    <h3>American Independence</h3>
+    <p>The Declaration of Independence is adopted.</p>
+  </div>
+
+  <div class="timeline-item">
+    <span>1969</span>
+    <h3>First Moon Landing</h3>
+    <p>Apollo 11 astronauts land on the Moon.</p>
+  </div>
+</section>
+
+<section class="fact-box" id="favorites">
+  <p class="gold">⭐ YOUR COLLECTION</p>
+  <h2>Favorite Facts</h2>
+  <p>Save interesting facts to read again later!</p>
+
+  <button onclick="saveFact()">⭐ Save Current Fact</button>
+
+  <div id="favoriteList"></div>
+</section>
+
+<section class="encyclopedia" id="encyclopedia">
+  <p class="gold">📚 HISTORY LIBRARY</p>
+  <h2>History Encyclopedia</h2>
+  <p class="subtitle">Choose a topic to discover its story.</p>
+
+  <div class="encyclopedia-grid">
+    <article class="history-card">
+      <img
+        src="https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=600&q=80"
+        alt="Ancient Egyptian pyramids"
+      />
+      <h3>Ancient Egypt</h3>
+      <p>Discover pyramids, pharaohs, and ancient mysteries.</p>
+      <button onclick="readArticle('egypt')">Read Article</button>
+    </article>
+
+    <article class="history-card">
+      <img
+        src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=600&q=80"
+        alt="Roman Colosseum"
+      />
+      <h3>Ancient Rome</h3>
+      <p>Explore the empire that shaped much of Europe.</p>
+      <button onclick="readArticle('rome')">Read Article</button>
+    </article>
+
+    <article class="history-card">
+      <img
+        src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
+        alt="Mountain landscape"
+      />
+      <h3>Viking Age</h3>
+      <p>Learn about Viking explorers, ships, and culture.</p>
+      <button onclick="readArticle('vikings')">Read Article</button>
+    </article>
+
+    <article class="history-card">
+      <img
+        src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80"
+        alt="Historical landscape"
+      />
+      <h3>Ancient Greece</h3>
+      <p>Discover Greek mythology, democracy, and philosophy.</p>
+      <button onclick="readArticle('greece')">Read Article</button>
+    </article>
+  </div>
+
+  <div id="articleReader" class="article-reader" hidden>
+    <button onclick="closeArticle()">✖ Close Article</button>
+    <h2 id="articleTitle"></h2>
+    <p id="articleText"></p>
+  </div>
+</section>
+
+<section class="daily-challenge" id="challenge">
+  <p class="gold">🏆 DAILY CHALLENGE</p>
+
+  <h2>History Champion</h2>
+
+  <p>Test your knowledge and earn history points!</p>
+
+  <div class="challenge-stats">
+    <div>
+      <h3 id="challengeScore">0</h3>
+      <p>Points</p>
+    </div>
+
+    <div>
+      <h3 id="challengeProgress">1 / 5</h3>
+      <p>Question</p>
+    </div>
+  </div>
+
+  <div class="challenge-box">
+    <h3 id="challengeQuestion">Loading question...</h3>
+
+    <div id="challengeAnswers"></div>
+
+    <p id="challengeFeedback"></p>
+
+    <button id="challengeNext" onclick="nextChallengeQuestion()" hidden>
+      Next Question →
+    </button>
+
+    <button id="challengeRestart" onclick="restartChallenge()" hidden>
+      Play Again 🔄
+    </button>
+  </div>
+
+  <div id="achievement"></div>
+</section>
+```html
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <h2>🏆 Your Achievements</h2>
+  <p>Explore history and collect badges!</p>
+
+  <div class="achievement-grid">
+    <div class="achievement-card" id="badge-explorer">
+      <div class="badge-icon">🗺️</div>
+      <h3>History Explorer</h3>
+      <p>Read your first history topic.</p>
+      <span class="badge-status">🔒 Locked</span>
+    </div>
+
+    <div class="achievement-card" id="badge-quiz">
+      <div class="badge-icon">🧠</div>
+      <h3>Quiz Master</h3>
+      <p>Answer a history quiz question correctly.</p>
+      <span class="badge-status">🔒 Locked</span>
+    </div>
+
+    <div class="achievement-card" id="badge-fact">
+      <div class="badge-icon">💡</div>
+      <h3>Fact Finder</h3>
+      <p>Discover a historical fun fact.</p>
+      <span class="badge-status">🔒 Locked</span>
+    </div>
+
+    <div class="achievement-card" id="badge-daily">
+      <div class="badge-icon">📅</div>
+      <h3>Daily Champion</h3>
+      <p>Complete a daily challenge.</p>
+      <span class="badge-status">🔒 Locked</span>
+    </div>
+  </div>
+
+  <p id="achievement-message">Your adventure starts here!</p>
+</section>
+``` ```html
+<!-- INTERACTIVE HISTORY MAP -->
+<section id="history-map">
+  <h2>🌍 Explore World History</h2>
+  <p>Choose a location to discover its history!</p>
+
+  <div class="map-container">
+    <div class="map-location">
+      <button data-history-place="egypt">🇪🇬 Egypt</button>
+      <button data-history-place="greece">🇬🇷 Greece</button>
+      <button data-history-place="rome">🇮🇹 Rome</button>
+      <button data-history-place="china">🇨🇳 China</button>
+      <button data-history-place="india">🇮🇳 India</button>
+      <button data-history-place="maya">🇲🇽 Maya Civilization</button>
+      <button data-history-place="america">🇺🇸 United States</button>
+      <button data-history-place="england">🇬🇧 England</button>
+    </div>
+  </div>
+
+  <div id="map-result">
+    <h3>Choose a historical location!</h3>
+    <p>Interesting facts will appear here.</p>
+  </div>
+</section>
+<!-- HISTORICAL EVENT OF THE DAY -->
+<section id="event-of-day">
+  <h2>📅 Historical Event of the Day</h2>
+  <p class="event-intro">Discover something amazing from the past!</p>
+
+  <div class="event-card">
+    <span class="event-label">TODAY'S HISTORY SPOTLIGHT</span>
+    <h3 id="event-title">Loading historical event...</h3>
+    <h4 id="event-date"></h4>
+    <p id="event-description"></p>
+    <p id="event-extra"></p>
+  </div>
+</section>
+<section id="event-of-day">
+  <h2>📅 Historical Event of the Day</h2>
+  <p>Discover something amazing from the past!</p>
+
+  <div class="event-card">
+    <h3 id="event-title">Loading...</h3>
+    <h4 id="event-date"></h4>
+    <p id="event-description"></p>
+    <p id="event-extra"></p>
+  </div>
+</section>
+<!-- HOLIDAY EXPLORER -->
+<section id="holiday-explorer">
+  <h2>🎉 Holiday Explorer</h2>
+  <p>Discover the history and traditions of holidays around the world!</p>
+
+  <div class="holiday-grid">
+    <button class="holiday-card" data-holiday="halloween">
+      <span>🎃</span>
+      <h3>Halloween</h3>
+      <p>October 31</p>
+    </button>
+
+    <button class="holiday-card" data-holiday="christmas">
+      <span>🎄</span>
+      <h3>Christmas</h3>
+      <p>December 25</p>
+    </button>
+
+    <button class="holiday-card" data-holiday="thanksgiving">
+      <span>🦃</span>
+      <h3>Thanksgiving</h3>
+      <p>November</p>
+    </button>
+
+    <button class="holiday-card" data-holiday="valentines">
+      <span>💝</span>
+      <h3>Valentine's Day</h3>
+      <p>February 14</p>
+    </button>
+
+    <button class="holiday-card" data-holiday="easter">
+      <span>🐰</span>
+      <h3>Easter</h3>
+      <p>Date changes yearly</p>
+    </button>
+
+    <button class="holiday-card" data-holiday="newyear">
+      <span>🎆</span>
+      <h3>New Year's Day</h3>
+      <p>January 1</p>
+    </button>
+
+    <button class="holiday-card" data-holiday="diwali">
+      <span>🪔</span>
+      <h3>Diwali</h3>
+      <p>Date changes yearly</p>
+    </button>
+
+    <button class="holiday-card" data-holiday="eid">
+      <span>🌙</span>
+      <h3>Eid al-Fitr</h3>
+      <p>Date changes yearly</p>
+    </button>
+
+    <button class="holiday-card" data-holiday="lunar">
+      <span>🧧</span>
+      <h3>Lunar New Year</h3>
+      <p>Date changes yearly</p>
+    </button>
+
+    <button class="holiday-card" data-holiday="dayofthedead">
+      <span>💀</span>
+      <h3>Día de los Muertos</h3>
+      <p>November 1–2</p>
+    </button>
+
+    <button class="holiday-card" data-holiday="passover">
+      <span>🍷</span>
+      <h3>Passover</h3>
+      <p>Date changes yearly</p>
+    </button>
+
+    <button class="holiday-card" data-holiday="independence">
+      <span>🎇</span>
+      <h3>Independence Day (USA)</h3>
+      <p>July 4</p>
+    </button>
+  </div>
+
+  <div id="holiday-details">
+    <h3>✨ Choose a holiday!</h3>
+    <p>Click any holiday above to discover its history.</p>
+  </div>
+</section>
+<!-- HOLIDAY COUNTDOWN CALENDAR -->
+
+<section id="holiday-calendar">
+  <h2>📅 Holiday Countdown Calendar</h2>
+  <p>See how long until your favorite holidays!</p>
+
+  <div class="countdown-grid">
+    <div class="countdown-card">
+      <span>🎃</span>
+      <h3>Halloween</h3>
+      <p id="halloween-countdown">Loading...</p>
+    </div>
+
+    <div class="countdown-card">
+      <span>🦃</span>
+      <h3>Thanksgiving</h3>
+      <p id="thanksgiving-countdown">Loading...</p>
+    </div>
+
+    <div class="countdown-card">
+      <span>🎄</span>
+      <h3>Christmas</h3>
+      <p id="christmas-countdown">Loading...</p>
+    </div>
+
+    <div class="countdown-card">
+      <span>🎆</span>
+      <h3>New Year's Day</h3>
+      <p id="newyear-countdown">Loading...</p>
+    </div>
+
+    <div class="countdown-card">
+      <span>💝</span>
+      <h3>Valentine's Day</h3>
+      <p id="valentines-countdown">Loading...</p>
+    </div>
+
+    <div class="countdown-card">
+      <span>🇺🇸</span>
+      <h3>Independence Day</h3>
+      <p id="independence-countdown">Loading...</p>
+    </div>
+  </div>
+</section>
+<!-- HISTORICAL MYSTERY GAME -->
+<section id="mystery-game">
+  <h2>🔎 Historical Mystery Game</h2>
+  <p class="mystery-intro">
+    Solve history's mysteries, crack clues, and earn points!
+  </p>
+
+  <div class="mystery-card">
+    <h3 id="mystery-title">Mystery #1: The Lost City</h3>
+
+    <p id="mystery-story">
+      An ancient civilization built an incredible city high in the Andes
+      Mountains. It was abandoned, and the outside world did not widely learn
+      about it until 1911.
+    </p>
+
+    <h4>🧩 Your Clue:</h4>
+    <p id="mystery-clue">This famous city is located in modern-day Peru.</p>
+
+    <div id="mystery-answers">
+      <button class="mystery-answer" data-answer="Rome">Rome</button>
+      <button class="mystery-answer" data-answer="Machu Picchu">
+        Machu Picchu
+      </button>
+      <button class="mystery-answer" data-answer="Babylon">Babylon</button>
+    </div>
+
+    <p id="mystery-feedback">Choose your answer!</p>
+    <p id="mystery-score">⭐ Score: 0</p>
+
+    <button id="next-mystery" disabled>Next Mystery ➡️</button>
+  </div>
+</section>
+<!-- HISTORY HUB LEADERBOARD -->
+<section id="leaderboard">
+  <h2>🏆 History Hub Leaderboard</h2>
+  <p>Who will become the ultimate History Master?</p>
+
+  <div class="leaderboard-card">
+    <h3>⭐ Hall of Fame</h3>
+
+    <div class="player-entry">
+      <input
+        type="text"
+        id="player-name"
+        placeholder="Enter your player name..."
+        maxlength="20"
+      />
+      <button id="save-score">Save My Score</button>
+    </div>
+
+    <p id="leaderboard-message">Enter your name to join the leaderboard!</p>
+
+    <div id="leaderboard-list"></div>
+  </div>
+</section>
+<!-- FEATURED HISTORY BANNER -->
+<section id="featured-banner">
+  <span>⭐ FEATURED HISTORY</span>
+  <h2>Discover the Wonders of Ancient Egypt</h2>
+  <p>
+    Explore pyramids, pharaohs, and one of history's greatest civilizations!
+  </p>
+  <button onclick="openTopic('egypt')">Explore Egypt</button>
+</section>
+
+<!-- FEATURED HISTORY CARDS -->
+<section id="featured-ads">
+  <h2>✨ Featured Discoveries</h2>
+
+  <div class="featured-ad-grid">
+    <div class="featured-ad">
+      <span>🏛️</span>
+      <h3>Ancient Rome</h3>
+      <p>Discover emperors, gladiators, and the Roman Empire.</p>
+      <button onclick="openTopic('rome')">Explore</button>
+    </div>
+
+    <div class="featured-ad">
+      <span>🏺</span>
+      <h3>Ancient Egypt</h3>
+      <p>Uncover the secrets of the pyramids and pharaohs.</p>
+      <button onclick="openTopic('egypt')">Explore</button>
+    </div>
+
+    <div class="featured-ad">
+      <span>⚔️</span>
+      <h3>World War II</h3>
+      <p>Learn about one of the most important events in modern history.</p>
+      <button onclick="openTopic('wwii')">Explore</button>
+    </div>
+  </div>
+</section>
