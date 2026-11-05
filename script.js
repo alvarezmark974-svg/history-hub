@@ -1169,3 +1169,53 @@ document.getElementById("who-next").addEventListener("click", () => { whoIndex++
 showYearRound();
 showTruthRound();
 showWhoRound();
+
+
+/* DAILY HISTORY REFRESHERS */
+const historyRefreshers = [
+{title:"The Great Pyramid",text:"The Great Pyramid of Giza was built for Pharaoh Khufu around 4,500 years ago.",question:"Which pharaoh was the Great Pyramid built for?",answer:"Pharaoh Khufu."},
+{title:"Ancient Olympic Games",text:"The ancient Olympic Games were held at Olympia in Greece and were connected with religious festivals.",question:"Where were the ancient Olympic Games held?",answer:"Olympia, Greece."},
+{title:"The Roman Empire",text:"Augustus became the first Roman emperor in 27 BCE, after years of political conflict.",question:"Who is traditionally considered the first Roman emperor?",answer:"Augustus."},
+{title:"American Independence",text:"The Declaration of Independence was adopted by the American colonies on July 4, 1776.",question:"What year was the Declaration of Independence adopted?",answer:"1776."},
+{title:"The Moon Landing",text:"Apollo 11 landed on the Moon in July 1969. Neil Armstrong and Buzz Aldrin walked on its surface.",question:"What mission first landed people on the Moon?",answer:"Apollo 11."},
+{title:"The Printing Press",text:"Johannes Gutenberg's movable-type printing press helped books spread more widely in Europe during the 15th century.",question:"What invention helped books spread more widely in Europe?",answer:"The movable-type printing press."},
+{title:"The Viking Age",text:"Viking communities came from Scandinavia. They were sailors, traders, craftspeople, farmers, and explorers.",question:"From which region did Vikings come?",answer:"Scandinavia."},
+{title:"Ancient Greece",text:"Ancient Greece consisted of city-states such as Athens and Sparta, each with its own government and customs.",question:"Name one famous ancient Greek city-state.",answer:"Athens or Sparta."},
+{title:"The Nile River",text:"The Nile provided water, fertile soil, and transportation that supported ancient Egyptian civilization.",question:"Which river helped ancient Egyptian civilization thrive?",answer:"The Nile River."},
+{title:"World War II",text:"World War II lasted from 1939 to 1945 and involved countries across the world.",question:"What years did World War II last?",answer:"1939–1945."},
+{title:"The Great Wall",text:"Different sections of the Great Wall of China were built and connected over many centuries.",question:"In which country is the Great Wall?",answer:"China."},
+{title:"The Maya",text:"Maya civilization developed in parts of Mesoamerica and made important advances in writing, mathematics, and astronomy.",question:"Name one area where the Maya made important advances.",answer:"Writing, mathematics, or astronomy."}
+];
+let refresherIndex = 0;
+function getRefresherDay() {
+  const now = new Date();
+  return now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0")+"-"+String(now.getDate()).padStart(2,"0");
+}
+function renderRefresher(index) {
+  const item = historyRefreshers[index];
+  document.getElementById("refresherTitle").textContent = item.title;
+  document.getElementById("refresherText").textContent = item.text;
+  document.getElementById("refresherQuestion").textContent = "🧠 Memory check: "+item.question;
+  document.getElementById("refresherAnswer").textContent = "Answer: "+item.answer;
+  document.getElementById("refresherQuestion").hidden = true;
+  document.getElementById("refresherAnswer").hidden = true;
+  document.getElementById("refresherReveal").hidden = false;
+}
+function revealRefresher() {
+  document.getElementById("refresherQuestion").hidden = false;
+  document.getElementById("refresherAnswer").hidden = false;
+  document.getElementById("refresherReveal").hidden = true;
+}
+function showAnotherRefresher() {
+  refresherIndex = (refresherIndex + 1) % historyRefreshers.length;
+  renderRefresher(refresherIndex);
+}
+function initDailyRefresher() {
+  const today = getRefresherDay();
+  const dateLabel = document.getElementById("refresherDate");
+  if (dateLabel) dateLabel.textContent = "DAILY REFRESHER • "+new Date().toLocaleDateString(undefined,{month:"long",day:"numeric",year:"numeric"});
+  const dayNumber = Math.floor(new Date(today+"T00:00:00").getTime()/86400000);
+  refresherIndex = ((dayNumber % historyRefreshers.length)+historyRefreshers.length)%historyRefreshers.length;
+  renderRefresher(refresherIndex);
+}
+initDailyRefresher();
