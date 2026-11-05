@@ -455,6 +455,45 @@
     </div>
   </div>
 </section>
+
+<!-- MORE HISTORY MINI GAMES -->
+<section id="mini-games">
+  <h2>🎮 More History Games</h2>
+  <p class="mini-games-intro">Play quick challenges and see how much history you know!</p>
+  <div class="mini-game-grid">
+    <article class="mini-game-card">
+      <span class="mini-game-icon">📅</span>
+      <h3>Guess the Year</h3>
+      <p id="year-question">Loading a history event...</p>
+      <div id="year-answers" class="mini-game-answers"></div>
+      <p id="year-feedback" class="mini-game-feedback" aria-live="polite">Choose the correct year.</p>
+      <button id="year-next" type="button" hidden>Next Event ➜</button>
+      <p class="mini-game-score" id="year-score">Score: 0</p>
+    </article>
+    <article class="mini-game-card">
+      <span class="mini-game-icon">⚖️</span>
+      <h3>True or False?</h3>
+      <p id="truth-question">Loading a history fact...</p>
+      <div class="mini-game-answers">
+        <button type="button" data-truth="true">True</button>
+        <button type="button" data-truth="false">False</button>
+      </div>
+      <p id="truth-feedback" class="mini-game-feedback" aria-live="polite">Pick an answer!</p>
+      <button id="truth-next" type="button" hidden>Next Fact ➜</button>
+      <p class="mini-game-score" id="truth-score">Score: 0</p>
+    </article>
+    <article class="mini-game-card">
+      <span class="mini-game-icon">🕵️</span>
+      <h3>Who Am I?</h3>
+      <p id="who-question">Loading a mystery person...</p>
+      <div id="who-answers" class="mini-game-answers"></div>
+      <p id="who-feedback" class="mini-game-feedback" aria-live="polite">Who is it?</p>
+      <button id="who-next" type="button" hidden>Next Person ➜</button>
+      <p class="mini-game-score" id="who-score">Score: 0</p>
+    </article>
+  </div>
+</section>
+
 <!-- HISTORICAL MYSTERY GAME -->
 <section id="mystery-game">
   <h2>🔎 Historical Mystery Game</h2>
