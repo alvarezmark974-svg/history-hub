@@ -494,7 +494,6 @@ function updateBadges() {
 
 // Load saved achievements
 updateBadges();
-finishChallenge()	unlockBadge("daily");```javascript
 // FIXED WORLD HISTORY MAP
 
 const worldHistoryPlaces = {
