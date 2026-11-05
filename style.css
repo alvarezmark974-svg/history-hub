@@ -922,3 +922,52 @@ footer {
   display: inline-block;
   border-radius: 12px;
 }
+
+
+/* EXTRA HISTORY MINI GAMES */
+#mini-games {
+  padding: 42px 20px;
+  text-align: center;
+}
+#mini-games h2 {
+  color: #d4af37;
+  font-size: 30px;
+}
+.mini-games-intro { color: #eeeeee; }
+.mini-game-grid {
+  max-width: 1100px;
+  margin: 25px auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+.mini-game-card {
+  background: #101d35;
+  border: 1px solid #d4af37;
+  border-radius: 16px;
+  padding: 24px;
+  color: #fff;
+  box-shadow: 0 5px 18px #0003;
+}
+.mini-game-icon { font-size: 38px; }
+.mini-game-card h3 { color: #ffd700; margin: 12px 0; }
+.mini-game-card p { line-height: 1.5; }
+.mini-game-answers {
+  display: grid;
+  gap: 9px;
+  margin: 16px 0;
+}
+.mini-game-card button {
+  background: #d4af37;
+  color: #101d35;
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.mini-game-card button:hover:not(:disabled) { background: #ffd700; }
+.mini-game-card button:disabled { opacity: .65; cursor: default; }
+.mini-game-card button[hidden] { display: none; }
+.mini-game-feedback { min-height: 48px; color: #ffe28a; }
+.mini-game-score { color: #ffd700; font-weight: bold; }
