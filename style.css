@@ -1208,3 +1208,16 @@ button:hover { box-shadow: 0 7px 18px #0003; }
   main > h2 { font-size: 29px; }
   .picture { height: 125px; }
 }
+
+
+/* DAILY REFRESHERS */
+.daily-refreshers{max-width:1050px;margin:65px auto;padding:42px 24px;text-align:center}
+.refresher-intro{color:#cbd2df}
+.refresher-card{max-width:760px;margin:28px auto 18px;padding:clamp(24px,5vw,42px);border:1px solid rgba(232,189,104,.35);border-radius:20px;text-align:left;background:radial-gradient(circle at top right,rgba(232,189,104,.1),transparent 38%),linear-gradient(145deg,#1d2d44,#111d2e);box-shadow:0 18px 45px #0003}
+.refresher-date{color:#e8bd68;font-size:11px;font-weight:800;letter-spacing:2px}
+.refresher-card h3{color:#f5d58e;font-family:Georgia,"Times New Roman",serif;font-size:clamp(24px,4vw,34px);margin:15px 0}
+.refresher-card>p{line-height:1.8;color:#e1e7ef}
+.refresher-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.refresher-question{padding:15px;border-left:3px solid #e8bd68;background:#243653;border-radius:8px}
+.refresher-answer{color:#f5d58e!important;font-weight:700}
+.refresher-note{color:#9eacc0;font-size:13px}
