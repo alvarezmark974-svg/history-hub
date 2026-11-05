@@ -1219,3 +1219,42 @@ function initDailyRefresher() {
   renderRefresher(refresherIndex);
 }
 initDailyRefresher();
+
+
+/* RANDOM HISTORY FACTS ON THE SCREEN SIDES */
+const sideHistoryFacts = [
+ {icon:"🏺",title:"Ancient Egypt",text:"Cleopatra lived closer in time to the Moon landing than to the building of the Great Pyramid."},
+ {icon:"🏛️",title:"Ancient Rome",text:"The Roman Empire used concrete in many buildings, some of which still stand today."},
+ {icon:"🌙",title:"Moon Landing",text:"Apollo 11 landed on the Moon on July 20, 1969."},
+ {icon:"📚",title:"Printing History",text:"The printing press helped books and ideas spread across Europe much faster."},
+ {icon:"🧭",title:"Viking Voyages",text:"Vikings traveled across the North Atlantic and reached parts of North America centuries before Columbus."},
+ {icon:"🏅",title:"Ancient Olympics",text:"The ancient Olympic Games were held at Olympia in Greece."},
+ {icon:"🧱",title:"Great Wall",text:"The Great Wall of China was built and rebuilt in different sections over many centuries."},
+ {icon:"🗽",title:"American History",text:"The Declaration of Independence was adopted on July 4, 1776."},
+ {icon:"🌊",title:"The Nile",text:"The Nile River helped ancient Egypt thrive by providing water and fertile soil."},
+ {icon:"🦖",title:"Dinosaur Time",text:"Non-avian dinosaurs went extinct millions of years before ancient Egyptian pyramids were built."},
+ {icon:"🧮",title:"Maya Mathematics",text:"Maya mathematicians developed a place-value system and used a symbol for zero."},
+ {icon:"🕰️",title:"Time Trick",text:"The 100 years from 1900 to 1999 are the 20th century—not the 19th."},
+ {icon:"🎭",title:"Greek Theater",text:"Ancient Greek theater grew from festivals and became an important part of civic life."},
+ {icon:"🧵",title:"Silk Road",text:"The Silk Road was a network of trade routes connecting regions across Asia and beyond."},
+ {icon:"🚂",title:"Industrial Age",text:"Steam engines helped transform transportation and manufacturing during the Industrial Revolution."}
+];
+function showRandomSideFacts() {
+  if (window.matchMedia("(max-width: 1250px)").matches) return;
+  const shuffled = sideHistoryFacts.slice().sort(() => Math.random() - 0.5);
+  const left = shuffled[0], right = shuffled[1];
+  const setFact = (side, fact) => {
+    const icon = document.getElementById("sideFactIcon" + side);
+    const title = document.getElementById("sideFactTitle" + side);
+    const text = document.getElementById("sideFactText" + side);
+    if (icon && title && text) {
+      icon.textContent = fact.icon;
+      title.textContent = fact.title;
+      text.textContent = fact.text;
+    }
+  };
+  setFact("Left", left);
+  setFact("Right", right);
+}
+showRandomSideFacts();
+setInterval(showRandomSideFacts, 18000);
