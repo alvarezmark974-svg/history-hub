@@ -49,24 +49,39 @@ function showHome() {
 }
 
 function searchHistory() {
-  const query = document.getElementById("searchInput").value.toLowerCase();
+  const query = document.getElementById("searchInput").value
+    .toLowerCase()
+    .replace(/[^a-z0-9\\s]/g, " ")
+    .trim();
   const results = document.getElementById("searchResults");
 
-  const matches = Object.entries(topics).filter(([key, topic]) =>
-    (topic.title + " " + topic.text).toLowerCase().includes(query)
-  );
-
-  if (!query.trim()) {
-    results.textContent = "Please enter something to search!";
+  if (!query) {
+    results.textContent = "Please enter a history keyword or question!";
     return;
   }
+
+  const ignoredWords = ["who", "what", "when", "where", "why", "how", "is", "are", "was", "were", "the", "a", "an", "did", "do", "does", "in", "of", "to", "for", "and", "built"];
+  const keywords = query.split(/\\s+/).filter(word => word.length > 1 && !ignoredWords.includes(word));
+
+  if (keywords.length === 0) {
+    results.textContent = "Try a keyword like Egypt, pyramids, Rome, or 1776.";
+    return;
+  }
+
+  const matches = Object.entries(topics).filter(([key, topic]) => {
+    const searchableText = (key + " " + topic.title + " " + topic.text).toLowerCase();
+    return keywords.some(word => searchableText.includes(word));
+  });
 
   if (matches.length === 0) {
-    results.textContent = "No topics found. Try Egypt, Rome, World War II, or America.";
+    results.textContent = "No topics found. Try Egypt, pyramids, Rome, World War II, or America.";
     return;
   }
 
-  results.innerHTML = "<h2>Search Results</h2>";
+  results.replaceChildren();
+  const heading = document.createElement("h2");
+  heading.textContent = "Search Results";
+  results.appendChild(heading);
 
   matches.forEach(([key, topic]) => {
     const button = document.createElement("button");
@@ -596,56 +611,6 @@ function showDailyEvent() {
   const dayNumber = Math.floor(
     (today - new Date(today.getFullYear(), 0, 0)) /
     86400000
-  );
-
-  const event = historyEvents[dayNumber % historyEvents.length];
-
-  document.getElementById("event-title").textContent = event.title;
-  document.getElementById("event-date").textContent = event.date;
-  document.getElementById("event-description").textContent = event.description;
-  document.getElementById("event-extra").textContent = event.extra;
-}
-
-showDailyEvent();// HISTORICAL EVENT OF THE DAY
-
-const historyEvents = [
-  {
-    title: "The First Moon Landing 🌙",
-    date: "July 20, 1969",
-    description: "Apollo 11 landed on the Moon, and Neil Armstrong became the first person to walk on its surface.",
-    extra: "This was a major milestone in space exploration!"
-  },
-  {
-    title: "The Berlin Wall Opens 🧱",
-    date: "November 9, 1989",
-    description: "East Germany opened its border crossings, allowing people to cross the Berlin Wall.",
-    extra: "This became an important moment in the end of the Cold War!"
-  },
-  {
-    title: "The United Nations Begins 🌍",
-    date: "October 24, 1945",
-    description: "The United Nations officially came into existence.",
-    extra: "Its goal includes promoting international peace and cooperation!"
-  },
-  {
-    title: "The Declaration of Independence 🇺🇸",
-    date: "July 4, 1776",
-    description: "The Declaration of Independence was adopted by the Second Continental Congress.",
-    extra: "This announced the thirteen colonies' independence from Britain!"
-  },
-  {
-    title: "The First Modern Olympic Games 🏅",
-    date: "April 6, 1896",
-    description: "The first modern Olympic Games opened in Athens, Greece.",
-    extra: "Athletes from different countries competed!"
-  }
-];
-
-function showDailyEvent() {
-  const today = new Date();
-
-  const dayNumber = Math.floor(
-    (today - new Date(today.getFullYear(), 0, 0)) / 86400000
   );
 
   const event = historyEvents[dayNumber % historyEvents.length];
