@@ -1018,7 +1018,7 @@ body {
   background: #101827;
 }
 .site-logo {
-  width: 170px;
+  width: min(340px, 90vw);
   filter: drop-shadow(0 8px 20px #0005);
 }
 .topbar {
@@ -1200,7 +1200,7 @@ button {
 }
 button:hover { box-shadow: 0 7px 18px #0003; }
 @media (max-width: 700px) {
-  .site-logo { width: 140px; }
+  .site-logo { width: min(260px, 90vw); }
   .topbar { padding: 12px 14px; }
   .hero { padding: 65px 18px 75px; }
   .hero > p:not(.gold) { font-size: 15px; }
