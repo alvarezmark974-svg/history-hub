@@ -910,3 +910,15 @@ footer {
   color: #eeeeee;
   line-height: 1.5;
 }
+.logo-container {
+  text-align: center;
+  padding: 15px 10px;
+}
+
+.site-logo {
+  width: 240px;
+  max-width: 90%;
+  height: auto;
+  display: inline-block;
+  border-radius: 12px;
+}
