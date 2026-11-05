@@ -7,8 +7,24 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="logo-container">
-  <img src="history-hub-logo.png" alt="History Hub Logo" class="site-logo">
+<div class="logo-container" aria-label="History Hub logo">
+  <svg class="site-logo" viewBox="0 0 520 150" role="img" aria-labelledby="historyHubLogoTitle" xmlns="http://www.w3.org/2000/svg">
+    <title id="historyHubLogoTitle">History Hub</title>
+    <defs>
+      <linearGradient id="hhLogoGold" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#fff0b8"/>
+        <stop offset="55%" stop-color="#e8bd68"/>
+        <stop offset="100%" stop-color="#b88735"/>
+      </linearGradient>
+    </defs>
+    <rect x="2" y="2" width="516" height="146" rx="22" fill="#101827" stroke="#e8bd68" stroke-opacity=".55" stroke-width="2"/>
+    <path d="M42 105V52h16v20h23V52h16v53H97V86H58v19z" fill="url(#hhLogoGold)"/>
+    <path d="M48 44h41M52 35h33M58 26h21" stroke="#e8bd68" stroke-width="4" stroke-linecap="round"/>
+    <text x="119" y="78" font-family="Georgia, 'Times New Roman', serif" font-size="39" font-weight="bold" fill="#f5f0e6">HISTORY</text>
+    <text x="120" y="117" font-family="Arial, sans-serif" font-size="31" font-weight="800" letter-spacing="8" fill="#e8bd68">HUB</text>
+    <path d="M290 105h190" stroke="#e8bd68" stroke-opacity=".45" stroke-width="2"/>
+    <text x="290" y="128" font-family="Arial, sans-serif" font-size="12" letter-spacing="2" fill="#cbd2df">EXPLORE THE PAST</text>
+  </svg>
 </div>
 <header class="topbar">
   <div class="logo">🏛️ HISTORY HUB</div>
