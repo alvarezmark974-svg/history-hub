@@ -49,48 +49,65 @@ function showHome() {
 }
 
 function searchHistory() {
-  const query = document.getElementById("searchInput").value
-    .toLowerCase()
-    .replace(/[^a-z0-9\s]/g, " ")
-    .trim();
+  const input = document.getElementById("searchInput");
   const results = document.getElementById("searchResults");
+  if (!input || !results) return;
+
+  const query = input.value.toLowerCase().replace(/[^a-z0-9\\s]/g, " ").trim();
+  results.replaceChildren();
 
   if (!query) {
-    results.textContent = "Please enter a history keyword or question!";
+    results.textContent = "Type a history topic or question to search.";
     return;
   }
 
-  const ignoredWords = ["who", "what", "when", "where", "why", "how", "is", "are", "was", "were", "the", "a", "an", "did", "do", "does", "in", "of", "to", "for", "and", "built"];
-  const keywords = query.split(/\s+/).filter(word => word.length > 1 && !ignoredWords.includes(word));
+  const searchTerms = {
+    egypt: ["egypt", "pyramid", "pyramids", "pharaoh", "pharaohs", "cleopatra", "nile", "hieroglyph"],
+    rome: ["rome", "roman", "romans", "empire", "aqueduct", "gladiator"],
+    ww2: ["world war ii", "wwii", "ww2", "second world war", "1939", "1945"],
+    america: ["america", "american revolution", "independence", "1776", "colonies", "britain"]
+  };
 
-  if (keywords.length === 0) {
-    results.textContent = "Try a keyword like Egypt, pyramids, Rome, or 1776.";
-    return;
-  }
-
+  const normalized = query.replace(/\\s+/g, " ");
   const matches = Object.entries(topics).filter(([key, topic]) => {
-    const searchableText = (key + " " + topic.title + " " + topic.text).toLowerCase();
-    return keywords.some(word => searchableText.includes(word));
+    const searchable = (key + " " + topic.title + " " + topic.text + " " +
+      (searchTerms[key] || []).join(" ")).toLowerCase();
+    const words = normalized.split(" ").filter(word =>
+      word.length > 1 && !["who", "what", "when", "where", "why", "how", "is", "are",
+        "was", "were", "the", "a", "an", "did", "do", "does", "in", "of", "to",
+        "for", "and", "built", "tell", "me", "about"].includes(word)
+    );
+    return words.some(word => searchable.includes(word)) ||
+      Object.values(searchTerms).some(terms => terms.some(term =>
+        normalized.includes(term) && terms.some(alias => searchable.includes(alias))
+      )) && searchable.includes(key);
   });
 
   if (matches.length === 0) {
-    results.textContent = "No topics found. Try Egypt, pyramids, Rome, World War II, or America.";
+    results.textContent = "No matching topic yet. Try Egypt, pyramids, Rome, World War II, or 1776.";
     return;
   }
 
-  results.replaceChildren();
   const heading = document.createElement("h2");
   heading.textContent = "Search Results";
   results.appendChild(heading);
 
   matches.forEach(([key, topic]) => {
     const button = document.createElement("button");
+    button.type = "button";
     button.textContent = topic.title;
-    button.onclick = () => openTopic(key);
+    button.addEventListener("click", () => openTopic(key));
     results.appendChild(button);
   });
 
-  results.scrollIntoView({ behavior: "smooth" });
+  results.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+const historySearchInput = document.getElementById("searchInput");
+if (historySearchInput) {
+  historySearchInput.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") searchHistory();
+  });
 }
 
 const questions = [
