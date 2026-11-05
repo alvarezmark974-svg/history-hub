@@ -51,7 +51,7 @@ function showHome() {
 function searchHistory() {
   const query = document.getElementById("searchInput").value
     .toLowerCase()
-    .replace(/[^a-z0-9\\s]/g, " ")
+    .replace(/[^a-z0-9\s]/g, " ")
     .trim();
   const results = document.getElementById("searchResults");
 
@@ -61,7 +61,7 @@ function searchHistory() {
   }
 
   const ignoredWords = ["who", "what", "when", "where", "why", "how", "is", "are", "was", "were", "the", "a", "an", "did", "do", "does", "in", "of", "to", "for", "and", "built"];
-  const keywords = query.split(/\\s+/).filter(word => word.length > 1 && !ignoredWords.includes(word));
+  const keywords = query.split(/\s+/).filter(word => word.length > 1 && !ignoredWords.includes(word));
 
   if (keywords.length === 0) {
     results.textContent = "Try a keyword like Egypt, pyramids, Rome, or 1776.";
@@ -438,7 +438,6 @@ function restartChallenge() {
 }
 
 showChallengeQuestion();
-```javascript
 // ACHIEVEMENT SYSTEM
 
 let earnedBadges = [];
@@ -495,9 +494,6 @@ function updateBadges() {
 
 // Load saved achievements
 updateBadges();
-```openTopic()	unlockBadge("explorer");
-newFact()	unlockBadge("fact");
-checkAnswer()	if (correct) unlockBadge("quiz");
 finishChallenge()	unlockBadge("daily");```javascript
 // FIXED WORLD HISTORY MAP
 
