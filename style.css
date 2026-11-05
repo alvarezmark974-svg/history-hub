@@ -971,3 +971,30 @@ footer {
 .mini-game-card button[hidden] { display: none; }
 .mini-game-feedback { min-height: 48px; color: #ffe28a; }
 .mini-game-score { color: #ffd700; font-weight: bold; }
+
+
+/* HISTORY HUB POLISH */
+html { scroll-behavior: smooth; scroll-padding-top: 24px; }
+body { line-height: 1.6; }
+.topbar { position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px); }
+nav { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+nav a { padding: 9px 12px; border-radius: 8px; transition: background .2s, color .2s; }
+nav a:hover, nav a:focus-visible { background: #263750; outline: 2px solid #e8bd68; outline-offset: 2px; }
+button, .card, .history-card, .featured-ad, .mini-game-card { transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid #ffe28a; outline-offset: 3px; }
+input { max-width: 100%; background: #fff; color: #172338; font: inherit; }
+.search-results { max-width: 900px; margin: 20px auto; }
+.dictionary-result { text-align: left; background: #1c2a40; border: 1px solid #596579; border-radius: 12px; padding: 20px; margin: 12px 0; }
+.dictionary-result h3 { color: #e8bd68; }
+section { scroll-margin-top: 90px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
+@media (max-width: 700px) {
+  .topbar { justify-content: center; text-align: center; }
+  nav { justify-content: center; }
+  .hero { padding: 48px 16px; }
+  .hero h1 { font-size: clamp(30px, 8vw, 44px); }
+  .search input { width: min(100%, 320px); }
+  .fact-box, .quiz, .topicPage, .challenge-box, .mystery-card { padding: 20px; }
+}
