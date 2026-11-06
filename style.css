@@ -1262,3 +1262,26 @@ button:hover { box-shadow: 0 7px 18px #0003; }
 #time-machine-result p{color:#e1e7ef;line-height:1.75}
 #time-machine-result .time-machine-date{color:#e8bd68;font-size:13px;font-weight:700}
 @media(max-width:600px){.time-machine-card{padding:18px}.time-machine-controls button{width:100%}}
+
+
+/* NEW STUDY AND CREATE FEATURES */
+.new-feature-section{max-width:1050px;margin:60px auto;padding:38px 22px;text-align:center}
+.new-feature-section>h2{color:#f5d58e}
+.flashcard-panel,.timeline-builder{max-width:760px;margin:24px auto;padding:clamp(22px,4vw,36px);text-align:left;border:1px solid rgba(232,189,104,.4);border-radius:20px;background:linear-gradient(145deg,#1d2d44,#111d2e);box-shadow:0 14px 35px #0003}
+#flashcard-count{font-size:12px;letter-spacing:1.5px;color:#e8bd68;font-weight:800}
+#flashcard-question{font: bold clamp(22px,3vw,30px) Georgia,serif;color:#fff;line-height:1.45;min-height:70px;margin:22px 0}
+#flashcard-answer{padding:16px;border-left:4px solid #e8bd68;background:#263653;border-radius:8px;color:#ffe29a;line-height:1.7}
+.flashcard-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.timeline-builder{display:grid;gap:10px}
+.timeline-builder label{color:#f5d58e;font-weight:700;margin-top:8px}
+.timeline-builder input,.timeline-builder textarea{width:100%;box-sizing:border-box;padding:13px;border:1px solid #8e9db2;border-radius:9px;background:#f7f8fb;color:#172338;font:inherit}
+.timeline-builder textarea{resize:vertical}
+#timeline-message{min-height:22px;color:#f5d58e}
+.custom-timeline-list{max-width:760px;margin:22px auto;text-align:left}
+.custom-timeline-entry{position:relative;margin:14px 0;padding:18px 20px 18px 24px;border-left:4px solid #e8bd68;border-radius:0 12px 12px 0;background:#1d2d44}
+.custom-timeline-entry .custom-year{color:#e8bd68;font-size:12px;font-weight:800;letter-spacing:1px}
+.custom-timeline-entry h3{margin:7px 0;color:#fff}
+.custom-timeline-entry p{color:#d6deeb;line-height:1.6;margin-bottom:0}
+.custom-timeline-entry button{margin-top:12px}
+.timeline-clear{background:#35445a}
+@media(max-width:600px){.flashcard-actions button{width:100%}.timeline-builder{padding:18px}}
