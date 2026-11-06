@@ -1488,3 +1488,24 @@ document.getElementById("flashcard-shuffle")?.addEventListener("click", () => {
 });
 renderFlashcard();
 
+
+
+// HISTORY MUSEUM FILTERS
+document.querySelectorAll("[data-museum-filter]").forEach(button=>{
+  button.addEventListener("click",()=>{
+    const category=button.dataset.museumFilter;
+    let visible=0;
+    document.querySelectorAll(".museum-exhibit").forEach(card=>{
+      const show=category==="all"||card.dataset.museumCategory===category;
+      card.hidden=!show;
+      if(show)visible++;
+    });
+    document.querySelectorAll("[data-museum-filter]").forEach(item=>{
+      const active=item===button;
+      item.classList.toggle("active",active);
+      item.setAttribute("aria-pressed",String(active));
+    });
+    const count=document.getElementById("museum-result-count");
+    if(count)count.textContent=category==="all"?"Showing all "+visible+" exhibits":"Showing "+visible+" "+button.textContent.trim().replace(/^\S+\s*/,"").toLowerCase();
+  });
+});
