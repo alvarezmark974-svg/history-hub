@@ -37,6 +37,7 @@
     <a href="#encyclopedia">Dictionary</a>
     <a href="#holiday-explorer">Holidays</a>
     <a href="#mini-games">Games</a>
+    <a href="#time-machine">Time Machine</a>
   </nav>
 </header>
 
@@ -655,6 +656,32 @@
     </div>
   </div>
 </section>
+
+<!-- HISTORY TIME MACHINE -->
+<section id="time-machine">
+  <p class="gold">🕰️ STEP INTO THE PAST</p>
+  <h2>History Time Machine</h2>
+  <p>Pick a year and travel to a moment from history!</p>
+  <div class="time-machine-card">
+    <label for="time-year">Choose a year (use a minus sign for BCE):</label>
+    <div class="time-machine-controls">
+      <input id="time-year" type="number" min="-3000" max="2026" value="1776" placeholder="Try 1776 or -2560">
+      <button type="button" onclick="travelThroughTime()">🚀 Take Me There</button>
+    </div>
+    <div class="time-machine-shortcuts">
+      <button type="button" onclick="setTimeYear(-2560)">🏺 2560 BCE</button>
+      <button type="button" onclick="setTimeYear(79)">🌋 79 CE</button>
+      <button type="button" onclick="setTimeYear(1492)">⛵ 1492</button>
+      <button type="button" onclick="setTimeYear(1969)">🌕 1969</button>
+    </div>
+    <div id="time-machine-result" aria-live="polite">
+      <span class="time-machine-label">YOUR DESTINATION</span>
+      <h3>🇺🇸 The American Revolution</h3>
+      <p>Set the year and press “Take Me There” to explore a historical moment.</p>
+    </div>
+  </div>
+</section>
+
 <script src="script.js"></script>
 </body>
 </html>
