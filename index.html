@@ -682,6 +682,45 @@
   </div>
 </section>
 
+
+<!-- HISTORY FLASHCARDS -->
+<section id="flashcards" class="new-feature-section">
+  <p class="gold">🧠 STUDY AND REMEMBER</p>
+  <h2>History Flashcards</h2>
+  <p>Practice important people, places, and events. Reveal the answer, then move to another card.</p>
+  <div class="flashcard-panel">
+    <span id="flashcard-count">CARD 1</span>
+    <h3 id="flashcard-question">Who was the first Roman emperor?</h3>
+    <p id="flashcard-answer" hidden>Augustus.</p>
+    <div class="flashcard-actions">
+      <button id="flashcard-reveal" type="button">Reveal Answer</button>
+      <button id="flashcard-next" type="button">Next Card →</button>
+      <button id="flashcard-shuffle" type="button">🔀 Shuffle Deck</button>
+    </div>
+  </div>
+</section>
+
+<!-- PERSONAL HISTORY TIMELINE BUILDER -->
+<section id="my-timeline" class="new-feature-section">
+  <p class="gold">✍️ CREATE SOMETHING</p>
+  <h2>Build Your Own History Timeline</h2>
+  <p>Add historical events to make a timeline you can customize. Your entries stay saved in this browser.</p>
+  <form id="timeline-form" class="timeline-builder">
+    <label for="timeline-year">Year (use a minus sign for BCE)</label>
+    <input id="timeline-year" type="number" min="-10000" max="2026" placeholder="Example: -2560" required>
+    <label for="timeline-title">Event title</label>
+    <input id="timeline-title" type="text" maxlength="70" placeholder="Example: Great Pyramid built" required>
+    <label for="timeline-description">Short description</label>
+    <textarea id="timeline-description" maxlength="240" rows="3" placeholder="Why is this event important?" required></textarea>
+    <button type="submit">＋ Add to My Timeline</button>
+    <p id="timeline-message" role="status" aria-live="polite"></p>
+  </form>
+  <div id="custom-timeline-list" class="custom-timeline-list">
+    <p>Your timeline is ready for its first event!</p>
+  </div>
+  <button id="timeline-clear" class="timeline-clear" type="button">Clear My Timeline</button>
+</section>
+
 <script src="script.js"></script>
 </body>
 </html>
