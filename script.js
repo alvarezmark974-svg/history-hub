@@ -1395,3 +1395,45 @@ document.getElementById("trivia-next")?.addEventListener("click",nextTrivia);
 document.getElementById("trivia-restart")?.addEventListener("click",restartTrivia);
 renderTrivia();
 
+
+
+// HISTORY TIME MACHINE
+const timeMachineEvents = [
+  {year:-3000,title:"The First Dynasties of Egypt",emoji:"🏺",text:"Around this time, ancient Egypt was becoming a unified kingdom along the Nile. Early rulers helped establish traditions that would shape Egyptian civilization for thousands of years."},
+  {year:-2560,title:"The Great Pyramid Takes Shape",emoji:"🔺",text:"The Great Pyramid of Giza was built as a royal tomb for Pharaoh Khufu. It became the only surviving wonder of the ancient world's original Seven Wonders."},
+  {year:-776,title:"The Ancient Olympic Games",emoji:"🏅",text:"The first recorded ancient Olympic Games were held at Olympia in Greece. Athletic contests honored Zeus and brought competitors together from Greek communities."},
+  {year:-44,title:"The Assassination of Julius Caesar",emoji:"🏛️",text:"Julius Caesar was killed in Rome in 44 BCE. The event led to further conflict and helped bring an end to the Roman Republic."},
+  {year:79,title:"Mount Vesuvius Erupts",emoji:"🌋",text:"Mount Vesuvius erupted and buried Pompeii and nearby Roman towns under volcanic material. Archaeological discoveries later revealed details of everyday Roman life."},
+  {year:476,title:"The Western Roman Empire Falls",emoji:"🛡️",text:"In 476 CE, the last western Roman emperor was removed from power. The eastern Roman Empire continued for many centuries."},
+  {year:1066,title:"The Norman Conquest of England",emoji:"🏰",text:"William, Duke of Normandy, defeated the English army at the Battle of Hastings and became king. The conquest changed England's language, government, and culture."},
+  {year:1215,title:"The Magna Carta",emoji:"📜",text:"King John of England agreed to the Magna Carta. It set out limits on royal authority and became an important symbol in the history of law."},
+  {year:1492,title:"A Voyage Across the Atlantic",emoji:"⛵",text:"Christopher Columbus's expedition reached the Caribbean in 1492. The voyage began a period of sustained contact, conquest, exchange, and enormous change between Europe and the Americas."},
+  {year:1776,title:"The Declaration of Independence",emoji:"🗽",text:"On July 4, 1776, the Second Continental Congress adopted the Declaration of Independence, announcing that the thirteen colonies regarded themselves as independent states."},
+  {year:1865,title:"The American Civil War Ends",emoji:"🕊️",text:"The Confederacy's defeat brought the American Civil War to a close in 1865. The nation faced the difficult work of ending slavery and rebuilding."},
+  {year:1969,title:"Humans Walk on the Moon",emoji:"🌕",text:"Apollo 11 astronauts landed on the Moon in July 1969. Neil Armstrong and Buzz Aldrin walked on its surface while Michael Collins orbited above."},
+  {year:1989,title:"The Berlin Wall Opens",emoji:"🧱",text:"In November 1989, border crossings in Berlin opened after weeks of peaceful demonstrations and political change. The wall had divided the city for decades."},
+  {year:2000,title:"A New Millennium Begins",emoji:"🎆",text:"The year 2000 was widely celebrated as the start of a new millennium, even though the third millennium technically began on January 1, 2001."}
+];
+function setTimeYear(year){
+  const input=document.getElementById("time-year");
+  if(input){input.value=year;travelThroughTime();}
+}
+function travelThroughTime(){
+  const input=document.getElementById("time-year");
+  const result=document.getElementById("time-machine-result");
+  if(!input||!result)return;
+  const year=Number(input.value);
+  if(input.value.trim()===""||!Number.isInteger(year)||year < -3000||year > 2026){
+    result.innerHTML="<span class='time-machine-label'>TIME TRAVEL ERROR</span><h3>🌀 That year is outside our time range</h3><p>Choose a whole year between 3000 BCE and 2026 CE.</p>";
+    return;
+  }
+  const event=timeMachineEvents.reduce((best,item)=>Math.abs(item.year-year)<Math.abs(best.year-year)?item:best,timeMachineEvents[0]);
+  const formatYear=value=>value<0?Math.abs(value)+" BCE":value+" CE";
+  const distance=Math.abs(event.year-year);
+  result.innerHTML="";
+  const label=document.createElement("span");label.className="time-machine-label";label.textContent="🚀 ARRIVED AT "+formatYear(event.year);
+  const heading=document.createElement("h3");heading.textContent=event.emoji+" "+event.title;
+  const date=document.createElement("p");date.className="time-machine-date";date.textContent="Closest featured event to "+formatYear(year)+(distance?" · "+distance+" year"+(distance===1?"":"s")+" away":"");
+  const description=document.createElement("p");description.textContent=event.text;
+  result.append(label,heading,date,description);
+}
