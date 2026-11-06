@@ -218,6 +218,32 @@
     </article>
   </div>
 
+      
+    <article class="history-card">
+      <div class="history-card-emoji">🏰</div>
+      <h3>Medieval Europe</h3>
+      <p>Castles, kingdoms, trade, and life in the Middle Ages.</p>
+      <button onclick="readArticle('medieval')">Read Article</button>
+    </article>
+    <article class="history-card">
+      <div class="history-card-emoji">🧧</div>
+      <h3>Imperial China</h3>
+      <p>Dynasties, inventions, the Silk Road, and a long history.</p>
+      <button onclick="readArticle('china')">Read Article</button>
+    </article>
+    <article class="history-card">
+      <div class="history-card-emoji">🎨</div>
+      <h3>The Renaissance</h3>
+      <p>Art, science, and new ideas transformed Europe.</p>
+      <button onclick="readArticle('renaissance')">Read Article</button>
+    </article>
+    <article class="history-card">
+      <div class="history-card-emoji">🏭</div>
+      <h3>Industrial Revolution</h3>
+      <p>Machines and factories changed how people worked and lived.</p>
+      <button onclick="readArticle('industrial')">Read Article</button>
+    </article>
+
   <div id="articleReader" class="article-reader" hidden>
     <button onclick="closeArticle()">✖ Close Article</button>
     <h2 id="articleTitle"></h2>
@@ -519,6 +545,20 @@
       <button id="who-next" type="button" hidden>Next Person ➜</button>
       <p class="mini-game-score" id="who-score">Score: 0</p>
     </article>
+  </div>
+</section>
+
+<!-- HISTORY TRIVIA GAME -->
+<section id="trivia-arena">
+  <p class="gold">🧠 QUICK THINKING CHALLENGE</p>
+  <h2>History Trivia Arena</h2>
+  <p>Answer questions from different eras, collect points, and become a trivia champion!</p>
+  <div class="trivia-card">
+    <div class="trivia-topline"><span id="trivia-category">Mixed History</span><span id="trivia-progress">Question 1 / 10</span></div>
+    <h3 id="trivia-question">Loading trivia...</h3>
+    <div id="trivia-options" class="trivia-options"></div>
+    <p id="trivia-feedback" aria-live="polite">Choose your answer!</p>
+    <div class="trivia-bottomline"><strong>⭐ Score: <span id="trivia-score">0</span></strong><button id="trivia-next" type="button" hidden>Next Question →</button><button id="trivia-restart" type="button" hidden>Play Again 🔁</button></div>
   </div>
 </section>
 
