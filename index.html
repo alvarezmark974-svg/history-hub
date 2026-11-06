@@ -38,6 +38,7 @@
     <a href="#holiday-explorer">Holidays</a>
     <a href="#mini-games">Games</a>
     <a href="#time-machine">Time Machine</a>
+    <a href="#history-museum">Museum</a>
   </nav>
 </header>
 
@@ -698,6 +699,71 @@
       <button id="flashcard-shuffle" type="button">🔀 Shuffle Deck</button>
     </div>
   </div>
+</section>
+
+<!-- HISTORY MUSEUM -->
+<section id="history-museum" class="museum-section">
+  <p class="gold">🏛️ STEP INSIDE THE PAST</p>
+  <h2>History Museum</h2>
+  <p class="museum-intro">Explore remarkable objects, world-changing inventions, and the people who shaped our story. Choose an exhibit to begin exploring.</p>
+  <div class="museum-filter" role="group" aria-label="Museum exhibit filters">
+    <button type="button" class="museum-filter-btn active" data-museum-filter="all" aria-pressed="true">🌎 All Exhibits</button>
+    <button type="button" class="museum-filter-btn" data-museum-filter="artifacts" aria-pressed="false">🏺 Ancient Artifacts</button>
+    <button type="button" class="museum-filter-btn" data-museum-filter="inventions" aria-pressed="false">💡 Famous Inventions</button>
+    <button type="button" class="museum-filter-btn" data-museum-filter="people" aria-pressed="false">👑 Biographies</button>
+  </div>
+  <p id="museum-result-count" class="museum-result-count" aria-live="polite">Showing all 12 exhibits</p>
+  <div class="museum-grid">
+    <article class="museum-exhibit" data-museum-category="artifacts">
+      <div class="museum-object">🏺</div><span class="museum-tag">ANCIENT ARTIFACT</span>
+      <h3>The Rosetta Stone</h3><p>Discovered in Egypt in 1799, this stone carries a decree written in three scripts. Comparing them helped scholars understand Egyptian hieroglyphs.</p><small>Ancient Egypt · 196 BCE</small>
+    </article>
+    <article class="museum-exhibit" data-museum-category="artifacts">
+      <div class="museum-object">🗿</div><span class="museum-tag">ANCIENT ARTIFACT</span>
+      <h3>Terracotta Army</h3><p>Thousands of clay soldiers, horses, and chariots were created to guard the tomb of China's first emperor, Qin Shi Huang.</p><small>Ancient China · 3rd century BCE</small>
+    </article>
+    <article class="museum-exhibit" data-museum-category="artifacts">
+      <div class="museum-object">📜</div><span class="museum-tag">ANCIENT ARTIFACT</span>
+      <h3 Dead Sea Scrolls</h3><p>These ancient manuscripts, found near the Dead Sea, include some of the oldest surviving copies of texts from the Hebrew Bible.</p><small>Judean Desert · roughly 3rd century BCE–1st century CE</small>
+    </article>
+    <article class="museum-exhibit" data-museum-category="artifacts">
+      <div class="museum-object">⚱️</div><span class="museum-tag">ANCIENT ARTIFACT</span>
+      <h3>Greek Painted Pottery</h3><p>Decorated pots show scenes from daily life, sports, myths, and ceremonies, giving historians clues about ancient Greek culture.</p><small>Ancient Greece · various periods</small>
+    </article>
+    <article class="museum-exhibit" data-museum-category="inventions">
+      <div class="museum-object">🖨️</div><span class="museum-tag">FAMOUS INVENTION</span>
+      <h3>Movable-Type Printing</h3><p>Johannes Gutenberg's printing system helped books and ideas spread more widely across Europe during the 15th century.</p><small>Europe · 15th century</small>
+    </article>
+    <article class="museum-exhibit" data-museum-category="inventions">
+      <div class="museum-object">🧭</div><span class="museum-tag">FAMOUS INVENTION</span>
+      <h3>The Magnetic Compass</h3><p>Developed in China, the compass used Earth's magnetic field to show direction and eventually became an important tool for navigation.</p><small>China · developed over many centuries</small>
+    </article>
+    <article class="museum-exhibit" data-museum-category="inventions">
+      <div class="museum-object">🚂</div><span class="museum-tag">FAMOUS INVENTION</span>
+      <h3>The Steam Locomotive</h3><p>Steam-powered railways transformed travel and trade during the Industrial Revolution, connecting towns and moving goods faster.</p><small>Britain · 19th century</small>
+    </article>
+    <article class="museum-exhibit" data-museum-category="inventions">
+      <div class="museum-object">💡</div><span class="museum-tag">FAMOUS INVENTION</span>
+      <h3>Practical Electric Lighting</h3><p>Inventors including Thomas Edison and Joseph Swan helped develop practical incandescent lighting systems that changed homes and cities.</p><small>United States and Britain · late 19th century</small>
+    </article>
+    <article class="museum-exhibit" data-museum-category="people">
+      <div class="museum-object">👑</div><span class="museum-tag">BIOGRAPHY</span>
+      <h3>Cleopatra VII</h3><p>The last active ruler of the Ptolemaic kingdom of Egypt, Cleopatra was known for her political skill and alliances in the Roman world.</p><small>Egypt · 69–30 BCE</small>
+    </article>
+    <article class="museum-exhibit" data-museum-category="people">
+      <div class="museum-object">🧪</div><span class="museum-tag">BIOGRAPHY</span>
+      <h3>Marie Curie</h3><p>A pioneering scientist who researched radioactivity, Curie became the first woman to win a Nobel Prize and the first person to win Nobel Prizes in two sciences.</p><small>Poland and France · 1867–1934</small>
+    </article>
+    <article class="museum-exhibit" data-museum-category="people">
+      <div class="museum-object">✊</div><span class="museum-tag">BIOGRAPHY</span>
+      <h3>Harriet Tubman</h3><p>Born into slavery, Tubman escaped and repeatedly risked her freedom to help others reach safety. She later served the Union during the American Civil War.</p><small>United States · c. 1822–1913</small>
+    </article>
+    <article class="museum-exhibit" data-museum-category="people">
+      <div class="museum-object">🌌</div><span class="museum-tag">BIOGRAPHY</span>
+      <h3>Katherine Johnson</h3><p>A mathematician at NASA, Johnson calculated flight paths that helped make early American human spaceflight missions possible.</p><small>United States · 1918–2020</small>
+    </article>
+  </div>
+  <p class="museum-note">Museum note: Dates for some ancient objects and inventions are approximate because historians continue to study the evidence.</p>
 </section>
 
 <script src="script.js"></script>
