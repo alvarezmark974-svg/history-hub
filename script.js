@@ -618,22 +618,34 @@ const historyEvents = [
 ];
 
 function showDailyEvent() {
-  const today = new Date();
+  const title = document.getElementById("event-title");
+  const date = document.getElementById("event-date");
+  const description = document.getElementById("event-description");
+  const extra = document.getElementById("event-extra");
 
+  // If the section isn't on this page, safely skip it.
+  if (!title || !date || !description || !extra || !historyEvents.length) return;
+
+  // Pick an event using the local calendar date.
+  const now = new Date();
   const dayNumber = Math.floor(
-    (today - new Date(today.getFullYear(), 0, 0)) /
-    86400000
+    (Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) -
+      Date.UTC(now.getFullYear(), 0, 1)) / 86400000
   );
+  const event = historyEvents[((dayNumber % historyEvents.length) + historyEvents.length) % historyEvents.length];
 
-  const event = historyEvents[dayNumber % historyEvents.length];
-
-  document.getElementById("event-title").textContent = event.title;
-  document.getElementById("event-date").textContent = event.date;
-  document.getElementById("event-description").textContent = event.description;
-  document.getElementById("event-extra").textContent = event.extra;
+  title.textContent = event.title;
+  date.textContent = event.date;
+  description.textContent = event.description;
+  extra.textContent = event.extra;
 }
 
-showDailyEvent();// HOLIDAY EXPLORER
+// Run after the page is ready so the event section exists before updating it.
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", showDailyEvent, { once: true });
+} else {
+  showDailyEvent();
+}// HOLIDAY EXPLORER
 
 const holidayInfo = {
   halloween: {
