@@ -277,6 +277,47 @@ Viking ships were designed to travel through both open water and shallow rivers.
 Vikings were traders, explorers, farmers, and warriors. Their history is much more than the battles often shown in movies.`
   },
 
+
+  medieval: {
+    title: "🏰 Medieval Europe: Castles, Communities, and Change",
+    text: `The period often called the Middle Ages in Europe lasted roughly from the fifth century to the fifteenth century. It was not one unchanging era: kingdoms rose and fell, cities expanded, and trade connected distant communities.
+
+Many people lived in villages and worked in farming. Towns were also home to merchants, craftspeople, and markets. Castles could serve as homes, administrative centers, and defensive strongholds, while monasteries preserved books and supported learning.
+
+The medieval world was connected to regions far beyond Europe. Goods, knowledge, and ideas traveled through trade networks across Africa, Asia, and the Mediterranean. The Silk Road was one famous network, not a single road.
+
+The Middle Ages also saw the growth of universities, new styles of architecture, and major changes in agriculture and commerce. Studying the period helps explain how modern countries, languages, and institutions developed.`
+  },
+  china: {
+    title: "🧧 Imperial China: Dynasties and Inventions",
+    text: `Chinese history spans thousands of years and includes many dynasties, each with its own achievements and challenges. The Qin dynasty unified much of China in 221 BCE, while later dynasties developed government systems, cities, art, and trade.
+
+China made influential contributions to technology and culture. Paper, printing, the compass, and gunpowder were developed in China over different periods and later spread through trade and cultural exchange.
+
+The Silk Road connected China with Central Asia, the Middle East, and regions farther west. Traders carried silk and other goods, while travelers also exchanged ideas, religious traditions, and technologies.
+
+China's history is too broad to fit into one story. Its many regions, languages, inventions, and traditions shaped East Asia and influenced the wider world.`
+  },
+  renaissance: {
+    title: "🎨 The Renaissance: A Revival of Art and Ideas",
+    text: `The Renaissance was a period of cultural and intellectual change that began in parts of Italy around the fourteenth century and spread through Europe over time. The word Renaissance means “rebirth,” reflecting renewed interest in ancient Greek and Roman art, writing, and learning.
+
+Artists studied anatomy, perspective, light, and the natural world to create more lifelike works. Leonardo da Vinci explored art and science, while Michelangelo created celebrated sculptures and paintings. Many other artists, writers, and thinkers also contributed.
+
+The Renaissance was not only about art. Scholars studied history, mathematics, literature, and science. The spread of printing helped books and ideas reach more readers.
+
+The period encouraged new ways of looking at human creativity and knowledge, although changes happened unevenly across different places and communities.`
+  },
+  industrial: {
+    title: "🏭 The Industrial Revolution: A World Transformed",
+    text: `The Industrial Revolution began in Britain in the eighteenth century and gradually spread to other parts of the world. New machines and power sources changed how goods were made.
+
+Factories increasingly produced items that had once been made by hand in small workshops or homes. Steam engines powered machinery and transportation, including trains and ships. These changes helped cities and industries grow rapidly.
+
+Industrialization created new jobs and made many products more widely available, but it also brought difficult conditions. Workers often faced long hours, dangerous workplaces, and crowded urban housing. Over time, labor movements and reforms pushed for improvements.
+
+The Industrial Revolution reshaped transportation, communication, economies, and everyday life. Its effects continue to influence the modern world.`
+  },
   greece: {
     title: "🏺 Ancient Greece",
     text: `Ancient Greece was made up of independent city-states, including Athens and Sparta.
@@ -1231,3 +1272,48 @@ function initDailyRefresher() {
   renderRefresher(refresherIndex);
 }
 initDailyRefresher();
+
+/* HISTORY TRIVIA ARENA */
+const triviaQuestions = [
+ {category:"Ancient Egypt",q:"Which river was central to ancient Egyptian life?",options:["Amazon","Nile","Danube","Yellow River"],answer:1,why:"The Nile provided water, fertile soil, and transportation."},
+ {category:"Ancient Greece",q:"Where were the ancient Olympic Games held?",options:["Athens","Sparta","Olympia","Corinth"],answer:2,why:"The games were held at Olympia in Greece."},
+ {category:"Ancient Rome",q:"What language was widely used in the Roman Empire in the west?",options:["Latin","Maya","Sanskrit","Old Norse"],answer:0,why:"Latin was the language of Roman administration and culture in the western empire."},
+ {category:"Exploration",q:"Which ship carried Charles Darwin on his famous voyage?",options:["Mayflower","HMS Beagle","Santa Maria","Endeavour"],answer:1,why:"Darwin traveled aboard HMS Beagle during its voyage in the 1830s."},
+ {category:"American History",q:"In what year was the Declaration of Independence adopted?",options:["1492","1620","1776","1865"],answer:2,why:"The Second Continental Congress adopted it on July 4, 1776."},
+ {category:"Space History",q:"What was the name of the mission that first landed people on the Moon?",options:["Apollo 8","Apollo 11","Gemini 4","Voyager 1"],answer:1,why:"Apollo 11 landed on the Moon in July 1969."},
+ {category:"World History",q:"The Silk Road was best described as what?",options:["One paved highway","A network of trade routes","A Roman aqueduct","A Viking ship"],answer:1,why:"It was a network of routes linking regions across Asia and beyond."},
+ {category:"Inventions",q:"Which invention helped books spread more widely in Europe?",options:["Movable-type printing press","Steam locomotive","Telephone","Radio"],answer:0,why:"Printing made it easier to produce multiple copies of books."},
+ {category:"Medieval History",q:"What was a common purpose of a medieval castle?",options:["Only a marketplace","Residence and defense","A modern factory","A space observatory"],answer:1,why:"Castles could serve as residences, administrative centers, and defensive structures."},
+ {category:"Renaissance",q:"Which artist painted the Mona Lisa?",options:["Raphael","Leonardo da Vinci","Donatello","Vincent van Gogh"],answer:1,why:"Leonardo da Vinci painted the Mona Lisa."}
+];
+let triviaIndex=0, triviaPoints=0, triviaAnswered=false;
+function renderTrivia(){
+ const qEl=document.getElementById("trivia-question"), optionsEl=document.getElementById("trivia-options");
+ if(!qEl||!optionsEl)return;
+ const q=triviaQuestions[triviaIndex];
+ document.getElementById("trivia-category").textContent=q.category;
+ document.getElementById("trivia-progress").textContent="Question "+(triviaIndex+1)+" / "+triviaQuestions.length;
+ qEl.textContent=q.q; optionsEl.replaceChildren();
+ document.getElementById("trivia-feedback").textContent="Choose your answer!";
+ document.getElementById("trivia-score").textContent=triviaPoints;
+ document.getElementById("trivia-next").hidden=true;document.getElementById("trivia-restart").hidden=true;
+ triviaAnswered=false;
+ q.options.forEach((option,index)=>{
+  const btn=document.createElement("button");btn.type="button";btn.textContent=option;
+  btn.addEventListener("click",()=>{
+   if(triviaAnswered)return;triviaAnswered=true;
+   const correct=index===q.answer;if(correct)triviaPoints++;
+   document.getElementById("trivia-feedback").textContent=(correct?"🎉 Correct! ":"Good try! ")+q.why+(correct?"":" Correct answer: "+q.options[q.answer]+".");
+   document.getElementById("trivia-score").textContent=triviaPoints;
+   optionsEl.querySelectorAll("button").forEach(b=>b.disabled=true);
+   if(triviaIndex===triviaQuestions.length-1){document.getElementById("trivia-next").hidden=true;document.getElementById("trivia-restart").hidden=false;document.getElementById("trivia-feedback").textContent+=" Final score: "+triviaPoints+" / "+triviaQuestions.length+"!";}
+   else document.getElementById("trivia-next").hidden=false;
+  });optionsEl.appendChild(btn);
+ });
+}
+function nextTrivia(){triviaIndex++;renderTrivia();}
+function restartTrivia(){triviaIndex=0;triviaPoints=0;renderTrivia();}
+document.getElementById("trivia-next")?.addEventListener("click",nextTrivia);
+document.getElementById("trivia-restart")?.addEventListener("click",restartTrivia);
+renderTrivia();
+
