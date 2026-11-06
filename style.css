@@ -1221,3 +1221,15 @@ button:hover { box-shadow: 0 7px 18px #0003; }
 .refresher-question{padding:15px;border-left:3px solid #e8bd68;background:#243653;border-radius:8px}
 .refresher-answer{color:#f5d58e!important;font-weight:700}
 .refresher-note{color:#9eacc0;font-size:13px}
+
+/* TRIVIA ARENA */
+#trivia-arena{max-width:1000px;margin:40px auto;padding:28px;background:linear-gradient(145deg,#17243a,#101827);border:1px solid #d9ad58;border-radius:22px;box-shadow:0 12px 35px #0003}
+.trivia-card{max-width:760px;margin:22px auto 0;padding:24px;background:#202d43;border:1px solid #ffffff20;border-radius:16px}
+.trivia-topline,.trivia-bottomline{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#e8bd68}
+#trivia-question{font-size:clamp(20px,3vw,28px);line-height:1.45;margin:24px 0}
+.trivia-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.trivia-options button{padding:14px;border-radius:12px;border:1px solid #d9ad58;background:#17243a;color:#fff;font-size:16px;cursor:pointer}
+.trivia-options button:hover:not(:disabled){background:#354965;transform:translateY(-1px)}
+.trivia-options button:disabled{opacity:.7;cursor:default}
+#trivia-feedback{min-height:54px;line-height:1.6;color:#f5d58e;margin:18px 0}
+@media(max-width:600px){.trivia-options{grid-template-columns:1fr}#trivia-arena{padding:18px}.trivia-card{padding:16px}}
