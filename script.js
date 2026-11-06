@@ -1437,3 +1437,130 @@ function travelThroughTime(){
   const description=document.createElement("p");description.textContent=event.text;
   result.append(label,heading,date,description);
 }
+
+
+// HISTORY FLASHCARDS
+const historyFlashcards = [
+  {q:"Who was the first Roman emperor?",a:"Augustus, who became emperor in 27 BCE."},
+  {q:"Which river was essential to ancient Egyptian civilization?",a:"The Nile River provided water, fertile soil, and transportation."},
+  {q:"What city hosted the ancient Olympic Games?",a:"Olympia, in ancient Greece."},
+  {q:"Who wrote the Magna Carta into law by agreeing to it in 1215?",a:"King John of England agreed to the Magna Carta."},
+  {q:"What year did the first people land on the Moon?",a:"1969, during NASA's Apollo 11 mission."},
+  {q:"What was the Silk Road?",a:"A network of trade routes connecting regions of Asia, Europe, and Africa."},
+  {q:"Which civilization built Machu Picchu?",a:"The Inca civilization, in the Andes of modern-day Peru."},
+  {q:"What invention helped books spread more widely in Europe?",a:"The movable-type printing press associated with Johannes Gutenberg."},
+  {q:"What year did the Berlin Wall open?",a:"1989, after peaceful demonstrations and political changes."},
+  {q:"Which ancient Greek city-state is often associated with the beginnings of democracy?",a:"Athens."},
+  {q:"What was the name of the ship Charles Darwin sailed on during his famous voyage?",a:"HMS Beagle."},
+  {q:"In what year was the Declaration of Independence adopted?",a:"1776."}
+];
+let flashcardIndex = 0;
+let flashcardOrder = historyFlashcards.map((_, index) => index);
+function renderFlashcard() {
+  const question = document.getElementById("flashcard-question");
+  const answer = document.getElementById("flashcard-answer");
+  const count = document.getElementById("flashcard-count");
+  if (!question || !answer || !count) return;
+  const card = historyFlashcards[flashcardOrder[flashcardIndex]];
+  question.textContent = card.q;
+  answer.textContent = card.a;
+  answer.hidden = true;
+  count.textContent = "CARD " + (flashcardIndex + 1) + " OF " + historyFlashcards.length;
+  document.getElementById("flashcard-reveal").textContent = "Reveal Answer";
+}
+document.getElementById("flashcard-reveal")?.addEventListener("click", () => {
+  const answer = document.getElementById("flashcard-answer");
+  if (!answer) return;
+  answer.hidden = !answer.hidden;
+  document.getElementById("flashcard-reveal").textContent = answer.hidden ? "Reveal Answer" : "Hide Answer";
+});
+document.getElementById("flashcard-next")?.addEventListener("click", () => {
+  flashcardIndex = (flashcardIndex + 1) % flashcardOrder.length;
+  renderFlashcard();
+});
+document.getElementById("flashcard-shuffle")?.addEventListener("click", () => {
+  for (let i = flashcardOrder.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [flashcardOrder[i], flashcardOrder[j]] = [flashcardOrder[j], flashcardOrder[i]];
+  }
+  flashcardIndex = 0;
+  renderFlashcard();
+});
+renderFlashcard();
+
+// PERSONAL TIMELINE BUILDER
+const timelineStorageKey = "historyHubCustomTimeline";
+let customTimelineEvents = [];
+try {
+  const savedTimeline = JSON.parse(localStorage.getItem(timelineStorageKey) || "[]");
+  if (Array.isArray(savedTimeline)) customTimelineEvents = savedTimeline.filter(item =>
+    item && Number.isInteger(item.year) && typeof item.title === "string" &&
+    typeof item.description === "string"
+  );
+} catch (error) {
+  customTimelineEvents = [];
+}
+function formatCustomTimelineYear(year) {
+  return year < 0 ? Math.abs(year) + " BCE" : year + " CE";
+}
+function renderCustomTimeline() {
+  const list = document.getElementById("custom-timeline-list");
+  if (!list) return;
+  list.replaceChildren();
+  if (!customTimelineEvents.length) {
+    const empty = document.createElement("p");
+    empty.textContent = "Your timeline is ready for its first event!";
+    list.appendChild(empty);
+    return;
+  }
+  [...customTimelineEvents].sort((a,b) => a.year - b.year).forEach((item,index) => {
+    const entry = document.createElement("article");
+    entry.className = "custom-timeline-entry";
+    const year = document.createElement("span");
+    year.className = "custom-year";
+    year.textContent = formatCustomTimelineYear(item.year);
+    const title = document.createElement("h3");
+    title.textContent = item.title;
+    const description = document.createElement("p");
+    description.textContent = item.description;
+    const remove = document.createElement("button");
+    remove.type = "button";
+    remove.textContent = "Remove";
+    remove.setAttribute("aria-label", "Remove " + item.title);
+    remove.addEventListener("click", () => {
+      customTimelineEvents.splice(index, 1);
+      saveCustomTimeline();
+    });
+    entry.append(year,title,description,remove);
+    list.appendChild(entry);
+  });
+}
+function saveCustomTimeline() {
+  try {
+    localStorage.setItem(timelineStorageKey, JSON.stringify(customTimelineEvents));
+    document.getElementById("timeline-message").textContent = "Saved in this browser!";
+  } catch (error) {
+    document.getElementById("timeline-message").textContent = "Your browser could not save this timeline.";
+  }
+  renderCustomTimeline();
+}
+document.getElementById("timeline-form")?.addEventListener("submit", event => {
+  event.preventDefault();
+  const year = Number(document.getElementById("timeline-year").value);
+  const title = document.getElementById("timeline-title").value.trim();
+  const description = document.getElementById("timeline-description").value.trim();
+  if (!Number.isInteger(year) || year < -10000 || year > 2026 || !title || !description) {
+    document.getElementById("timeline-message").textContent = "Please enter a valid year, title, and description.";
+    return;
+  }
+  customTimelineEvents.push({year,title,description});
+  saveCustomTimeline();
+  event.target.reset();
+});
+document.getElementById("timeline-clear")?.addEventListener("click", () => {
+  if (!customTimelineEvents.length) return;
+  customTimelineEvents = [];
+  saveCustomTimeline();
+  document.getElementById("timeline-message").textContent = "Your timeline has been cleared.";
+});
+renderCustomTimeline();
