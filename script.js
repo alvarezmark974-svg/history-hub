@@ -53,61 +53,139 @@ function searchHistory() {
   const results = document.getElementById("searchResults");
   if (!input || !results) return;
 
-  const query = input.value.toLowerCase().replace(/[^a-z0-9\\s]/g, " ").trim();
+  const query = input.value.trim().toLowerCase();
   results.replaceChildren();
 
   if (!query) {
-    results.textContent = "Type a history topic or question to search.";
+    const message = document.createElement("p");
+    message.textContent = "Type a history topic, person, place, or event to search.";
+    results.appendChild(message);
+    input.focus();
     return;
   }
 
-  const searchTerms = {
-    egypt: ["egypt", "pyramid", "pyramids", "pharaoh", "pharaohs", "cleopatra", "nile", "hieroglyph"],
-    rome: ["rome", "roman", "romans", "empire", "aqueduct", "gladiator"],
-    ww2: ["world war ii", "wwii", "ww2", "second world war", "1939", "1945"],
-    america: ["america", "american revolution", "independence", "1776", "colonies", "britain"]
-  };
+  const normalize = value => String(value || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 
-  const normalized = query.replace(/\\s+/g, " ");
-  const matches = Object.entries(topics).filter(([key, topic]) => {
-    const searchable = (key + " " + topic.title + " " + topic.text + " " +
-      (searchTerms[key] || []).join(" ")).toLowerCase();
-    const words = normalized.split(" ").filter(word =>
-      word.length > 1 && !["who", "what", "when", "where", "why", "how", "is", "are",
-        "was", "were", "the", "a", "an", "did", "do", "does", "in", "of", "to",
-        "for", "and", "built", "tell", "me", "about"].includes(word)
-    );
-    return words.some(word => searchable.includes(word)) ||
-      Object.values(searchTerms).some(terms => terms.some(term =>
-        normalized.includes(term) && terms.some(alias => searchable.includes(alias))
-      )) && searchable.includes(key);
+  const stopWords = new Set([
+    "who","what","when","where","why","how","is","are","was","were","the","a","an",
+    "did","do","does","in","of","to","for","and","or","built","tell","me","about",
+    "can","you","which","this","that","from","with","on","by","it","its","i","history"
+  ]);
+  const terms = normalize(query).split(" ").filter(word => word.length > 1 && !stopWords.has(word));
+  const entries = [];
+
+  // Main topic cards
+  if (typeof topics !== "undefined") {
+    Object.entries(topics).forEach(([key, item]) => {
+      entries.push({
+        title: item.title || key,
+        text: item.text || "",
+        action: () => openTopic(key),
+        label: "History topic"
+      });
+    });
+  }
+
+  // Encyclopedia articles, including the longer articles
+  if (typeof encyclopediaArticles !== "undefined") {
+    Object.entries(encyclopediaArticles).forEach(([key, item]) => {
+      entries.push({
+        title: item.title || key,
+        text: item.text || "",
+        action: () => readArticle(key),
+        label: "Encyclopedia article"
+      });
+    });
+  }
+
+  // Historical Event of the Day entries
+  if (typeof historyEvents !== "undefined") {
+    historyEvents.forEach(item => entries.push({
+      title: item.title,
+      text: [item.date, item.description, item.extra].join(" "),
+      action: () => document.getElementById("event-of-day")?.scrollIntoView({behavior:"smooth"}),
+      label: "Historical event"
+    }));
+  }
+
+  // Daily refreshers
+  if (typeof historyRefreshers !== "undefined") {
+    historyRefreshers.forEach(item => entries.push({
+      title: item.title,
+      text: [item.text, item.question, item.answer].join(" "),
+      action: () => document.getElementById("daily-refreshers")?.scrollIntoView({behavior:"smooth"}),
+      label: "Daily refresher"
+    }));
+  }
+
+  // Timeline entries already shown on the page
+  document.querySelectorAll(".timeline-item").forEach(item => {
+    const title = item.querySelector("h3")?.textContent || "History timeline";
+    entries.push({
+      title,
+      text: item.textContent,
+      action: () => item.scrollIntoView({behavior:"smooth", block:"center"}),
+      label: "Timeline"
+    });
   });
 
-  if (matches.length === 0) {
-    results.textContent = "No matching topic yet. Try Egypt, pyramids, Rome, World War II, or 1776.";
-    return;
-  }
+  const scored = entries.map(item => {
+    const title = normalize(item.title);
+    const text = normalize(item.text);
+    const full = title + " " + text;
+    let score = 0;
+    if (full.includes(normalize(query))) score += 8;
+    terms.forEach(term => {
+      if (title.includes(term)) score += 4;
+      else if (text.includes(term)) score += 1;
+    });
+    return {...item, score};
+  }).filter(item => item.score > 0)
+    .sort((a,b) => b.score - a.score)
+    .slice(0, 12);
 
   const heading = document.createElement("h2");
   heading.textContent = "Search Results";
   results.appendChild(heading);
 
-  matches.forEach(([key, topic]) => {
+  if (!scored.length) {
+    const message = document.createElement("p");
+    message.textContent = "No results found. Try a person, place, civilization, or event—like Cleopatra, Egypt, Rome, Vikings, pyramids, or the Moon landing.";
+    results.appendChild(message);
+    results.scrollIntoView({behavior:"smooth", block:"nearest"});
+    return;
+  }
+
+  const summary = document.createElement("p");
+  summary.textContent = "Found " + scored.length + " result" + (scored.length === 1 ? "" : "s") + " for “" + query + "”.";
+  results.appendChild(summary);
+
+  const list = document.createElement("div");
+  list.className = "search-result-list";
+  scored.forEach(item => {
+    const card = document.createElement("article");
+    card.className = "search-result-card";
+    const category = document.createElement("span");
+    category.className = "search-result-label";
+    category.textContent = item.label;
+    const title = document.createElement("h3");
+    title.textContent = item.title;
+    const snippet = document.createElement("p");
+    const plainText = String(item.text || "").replace(/\s+/g, " ").trim();
+    snippet.textContent = plainText.length > 190 ? plainText.slice(0,187) + "..." : plainText;
     const button = document.createElement("button");
     button.type = "button";
-    button.textContent = topic.title;
-    button.addEventListener("click", () => openTopic(key));
-    results.appendChild(button);
+    button.textContent = "Open result →";
+    button.addEventListener("click", item.action);
+    card.append(category,title,snippet,button);
+    list.appendChild(card);
   });
-
-  results.scrollIntoView({ behavior: "smooth", block: "nearest" });
-}
-
-const historySearchInput = document.getElementById("searchInput");
-if (historySearchInput) {
-  historySearchInput.addEventListener("keydown", function(event) {
-    if (event.key === "Enter") searchHistory();
-  });
+  results.appendChild(list);
+  results.scrollIntoView({behavior:"smooth", block:"nearest"});
 }
 
 const questions = [
