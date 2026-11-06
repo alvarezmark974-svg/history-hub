@@ -1245,3 +1245,20 @@ button:hover { box-shadow: 0 7px 18px #0003; }
 .search-result-card p{line-height:1.6;color:#d6deeb}
 .search-result-card button{margin-top:8px}
 .search input{min-width:0}
+
+
+/* HISTORY TIME MACHINE */
+#time-machine{padding:48px 20px;text-align:center}
+#time-machine h2{color:#f5d58e;font-size:clamp(26px,4vw,34px)}
+.time-machine-card{max-width:780px;margin:25px auto;padding:30px;background:linear-gradient(145deg,#1c2a40,#101d35);border:1px solid #d9ad58;border-radius:20px;box-shadow:0 10px 30px #0004;text-align:left}
+.time-machine-card>label{display:block;color:#f5d58e;font-weight:700;margin-bottom:10px}
+.time-machine-controls{display:flex;gap:10px;flex-wrap:wrap}
+.time-machine-controls input{flex:1;min-width:180px;padding:13px;border:1px solid #d9ad58;border-radius:9px;background:#fff;color:#172338;font:inherit}
+.time-machine-shortcuts{display:flex;gap:9px;flex-wrap:wrap;margin:16px 0 24px}
+.time-machine-shortcuts button{background:#263b59;color:#fff;border:1px solid #d9ad58}
+#time-machine-result{padding:22px;background:#263653;border-radius:14px;border-left:4px solid #e8bd68;min-height:150px}
+.time-machine-label{font-size:12px;letter-spacing:1.5px;font-weight:800;color:#e8bd68}
+#time-machine-result h3{font-size:23px;color:#ffe28a;margin:12px 0}
+#time-machine-result p{color:#e1e7ef;line-height:1.75}
+#time-machine-result .time-machine-date{color:#e8bd68;font-size:13px;font-weight:700}
+@media(max-width:600px){.time-machine-card{padding:18px}.time-machine-controls button{width:100%}}
